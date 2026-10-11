@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dash</title>
+    <link rel="icon" type="image/png" href="notes.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 9999px;
+        }
+        .glass-card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .tab-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-300 antialiased selection:bg-pink-300 selection:text-slate-900 pb-12">
+
+    <!-- Top Header Bar -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 glass-card border-b border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 py-4 transition-colors">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            
+            <!-- Greeting & Name -->
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 id="greeting-text" class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Good Morning, Piyo 𝜗ৎ !</h1>
+                </div>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Semoga harimu menyenangkan! ❤︎</p>
+            </div>
+
+            <!-- Date, Realtime Clock, & Controls -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <!-- Clock & Date Pill -->
+                <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/80 px-3.5 py-2 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-medium">
+                    <span class="text-slate-500 dark:text-slate-400 font-mono" id="current-time-display">--:--:--</span>
+                    <span class="text-slate-300 dark:text-slate-600">|</span>
+                    <span class="text-slate-600 dark:text-slate-300" id="current-date-display">--</span>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all shadow-sm">
+                    <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-8 pt-6">
+
+        <!-- CONTAINER FITUR: GRID MENU BUTTONS -->
+        <section class="mb-6">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                
+                <!-- 1. Note Button -->
+                <button onclick="switchTab('note')" id="menu-btn-note" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="sticky-note" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Catatan</span>
+                        <span class="text-[11px] text-slate-400">Ide & To-do list</span>
+                    </div>
+                </button>
+
+                <!-- 2. Keuangan Button -->
+                <button onclick="switchTab('finance')" id="menu-btn-finance" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="wallet" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Keuangan</span>
+                        <span class="text-[11px] text-slate-400">Catat harian</span>
+                    </div>
+                </button>
+
+                <!-- 3. Movie Button -->
+                <button onclick="switchTab('movie')" id="menu-btn-movie" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="film" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Nonton</span>
+                        <span class="text-[11px] text-slate-400">Series & Film</span>
+                    </div>
+                </button>
+
+                <!-- 4. Air Minum Button -->
+                <button onclick="switchTab('water')" id="menu-btn-water" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-pink-500 text-white border border-pink-400 shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-white/20 text-white group-hover:scale-110 transition-transform">
+                        <i data-lucide="glass-water" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-white">Air Minum</span>
+                        <span class="text-[11px] text-pink-100">Target 2L / 8 Gelas</span>
+                    </div>
+                </button>
+
+                <!-- 5. Reminder Button -->
+                <button onclick="switchTab('reminder')" id="menu-btn-reminder" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="bell-ring" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Reminder</span>
+                        <span class="text-[11px] text-slate-400">Rutinitas berkala</span>
+                    </div>
+                </button>
+
+                <!-- 6. Wishlist Button -->
+                <button onclick="switchTab('wishlist')" id="menu-btn-wishlist" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="gift" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Wishlist</span>
+                        <span class="text-[11px] text-slate-400">Impian terbeli</span>
+                    </div>
+                </button>
+
+                <!-- 7. Planner Button -->
+                <button onclick="switchTab('planner')" id="menu-btn-planner" class="tab-btn col-span-2 sm:col-span-3 flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
+                    <div class="p-3 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="calendar" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-sm text-slate-800 dark:text-slate-100">Month Planner</span>
+                        <span class="text-[11px] text-slate-400">Kalender agenda & event bulanan</span>
+                    </div>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- CONTAINER DATA -->
+        <section id="data-container-wrapper" class="bg-white/90 dark:bg-slate-900/90 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80 dark:border-slate-800 transition-all">
+            
+            <!-- A. AIR MINUM PANEL (Default Active) -->
+            <div id="panel-water" class="feature-panel space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-sky-400 to-cyan-500 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+                    <div class="relative z-10 space-y-2">
+                        <div class="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md">
+                            <i data-lucide="droplets" class="w-3.5 h-3.5"></i> TARGET HARIAN AIR MINUM
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-black"><span id="water-glasses-count">0</span> / 8 Gelas</h2>
+                        <p id="water-message" class="text-sky-100 text-sm max-w-md">Kurang 8 gelas lagi. Yuk minum air biar tubuh tetap segar!</p>
+                    </div>
+                    <div class="relative z-10 flex items-center gap-3 w-full sm:w-auto">
+                        <button onclick="adjustWater(-1)" class="flex-1 sm:flex-none px-5 py-3 rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-bold text-sm transition active:scale-95 shadow-sm">
+                            - Kurang 1
+                        </button>
+                        <button onclick="adjustWater(1)" class="flex-1 sm:flex-none px-6 py-3 rounded-2xl bg-white text-sky-600 hover:bg-sky-50 font-bold text-sm transition active:scale-95 shadow-md">
+                            + Tambah 1 Gelas
+                        </button>
+                    </div>
+                    <div class="absolute -right-6 -bottom-6 text-white/10 pointer-events-none">
+                        <i data-lucide="droplet" class="w-48 h-48"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm sm:text-base">TAMBAH GELAS HARI INI</h3>
+                        <button onclick="resetWater()" class="text-xs text-slate-400 hover:text-rose-500 transition">Reset Hari Ini</button>
+                    </div>
+                    <div id="glasses-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+                </div>
+            </div>
+
+            <!-- B. NOTE PANEL -->
+            <div id="panel-note" class="feature-panel hidden space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Catatan & To-Do List</h2>
+                        <p class="text-xs text-slate-500">Tulis ide atau buat checklist harianmu</p>
+                    </div>
+                    <button onclick="openNoteModal()" class="px-4 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition">
+                        + Catatan Baru
+                    </button>
+                </div>
+                <div id="notes-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2"></div>
+            </div>
+
+            <!-- C. KEUANGAN PANEL -->
+            <div id="panel-finance" class="feature-panel hidden space-y-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Keuangan Harian</h2>
+                        <p class="text-xs text-slate-500">Total Keluar Hari Ini: <span id="finance-total-display" class="font-bold text-emerald-600 dark:text-emerald-400">Rp 0</span></p>
+                    </div>
+                    <button onclick="openFinanceModal()" class="px-4 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow-sm transition">
+                        + Catat Pengeluaran
+                    </button>
+                </div>
+                <div id="finance-container" class="space-y-3 pt-2"></div>
+            </div>
+
+            <!-- D. MOVIE PANEL -->
+            <div id="panel-movie" class="feature-panel hidden space-y-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Movie & Series Tracker</h2>
+                        <p class="text-xs text-slate-500">Pantau tontonan favoritmu</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl text-xs font-medium">
+                            <button onclick="switchMovieTab('watching')" id="mov-tab-watching" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition">Sedang Ditonton</button>
+                            <button onclick="switchMovieTab('wish')" id="mov-tab-wish" class="px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400">Wishmovie</button>
+                            <button onclick="switchMovieTab('completed')" id="mov-tab-completed" class="px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400">Sudah</button>
+                        </div>
+                        <button onclick="openMovieModal()" class="px-3 py-2 rounded-2xl bg-purple-500 hover:bg-purple-600 text-white text-xs font-bold shadow-sm transition">
+                            + Movie
+                        </button>
+                    </div>
+                </div>
+                <div id="movies-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2"></div>
+            </div>
+
+            <!-- E. REMINDER PANEL -->
+            <div id="panel-reminder" class="feature-panel hidden space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Reminder Rutinitas</h2>
+                        <p class="text-xs text-slate-500">Hitung otomatis jadwal berikutnya (keramas, potong kuku, dll)</p>
+                    </div>
+                    <button onclick="openReminderModal()" class="px-4 py-2.5 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold shadow-sm transition">
+                        + Reminder
+                    </button>
+                </div>
+                <div id="reminders-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2"></div>
+            </div>
+
+            <!-- F. WISHLIST PANEL -->
+            <div id="panel-wishlist" class="feature-panel hidden space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Wishlist Barang & Impian</h2>
+                        <p class="text-xs text-slate-500">Coret jika sudah tercapai atau terbeli</p>
+                    </div>
+                    <button onclick="openWishlistModal()" class="px-4 py-2.5 rounded-2xl bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold shadow-sm transition">
+                        + Wishlist
+                    </button>
+                </div>
+                <div id="wishlist-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2"></div>
+            </div>
+
+            <!-- G. PLANNER PANEL -->
+            <div id="panel-planner" class="feature-panel hidden space-y-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                        </div>
+                        <h2 id="calendar-month-year" class="text-lg font-bold text-slate-900 dark:text-white">Oktober 2026</h2>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button onclick="changeMonth(-1)" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                        <button onclick="changeMonth(1)" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 pt-2">
+                    <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+                </div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-2 pt-1"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODALS CONTAINER -->
+
+    <!-- NOTE MODAL -->
+    <div id="modal-note" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Catatan Baru</h3>
+            <form id="form-note" onsubmit="saveNote(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Judul Note</label>
+                    <input type="text" id="note-title" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-semibold text-slate-500">Isian Note</label>
+                        <label class="flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer">
+                            <input type="checkbox" id="note-is-checklist" onchange="toggleNoteInputType()" class="rounded border-slate-300 text-amber-500 focus:ring-amber-400">
+                            Mode Checklist
+                        </label>
+                    </div>
+                    <div id="note-content-normal-wrap">
+                        <textarea id="note-content" rows="4" placeholder="Tulis catatanmu di sini..." class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none"></textarea>
+                    </div>
+                    <div id="note-content-checklist-wrap" class="hidden space-y-2">
+                        <div id="checklist-items-container" class="space-y-2 max-h-36 overflow-y-auto"></div>
+                        <button type="button" onclick="addChecklistItemInput()" class="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline">+ Tambah Item List</button>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-white hover:bg-amber-600 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FINANCE MODAL -->
+    <div id="modal-finance" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Catat Pengeluaran Keuangan</h3>
+            <form id="form-finance" onsubmit="saveFinance(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Jumlah (Rp)</label>
+                    <input type="number" id="fin-amount" required placeholder="Contoh: 25000" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Untuk Apa? (Deskripsi)</label>
+                    <input type="text" id="fin-desc" required placeholder="Makan siang, bensin, dll" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Ambil dari Sumber Mana?</label>
+                    <select id="fin-source" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                        <option value="BCA">BCA</option>
+                        <option value="Cash / Tunai">Cash / Tunai</option>
+                        <option value="GoPay / OVO">GoPay / OVO / E-Wallet</option>
+                        <option value="SeaBank / Jago">SeaBank / Jago</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500 text-white hover:bg-emerald-600 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MOVIE MODAL -->
+    <div id="modal-movie" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Movie / Series</h3>
+            <form id="form-movie" onsubmit="saveMovie(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Kategori Status</label>
+                    <select id="mov-category" onchange="toggleMovieCategoryFields()" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400">
+                        <option value="watching">Sedang Ditonton</option>
+                        <option value="wish">Wishmovie</option>
+                        <option value="completed">Sudah Ditonton</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Judul Movie / Series</label>
+                    <input type="text" id="mov-title" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400">
+                </div>
+
+                <div id="mov-fields-watching" class="space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Episode Sekarang</label>
+                            <input type="text" id="mov-ep" placeholder="Ep. 4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Stop di Detik (00:00:00)</label>
+                            <input type="text" id="mov-timestamp" placeholder="00:24:15" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mov-fields-wish" class="space-y-3 hidden">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Total Episode</label>
+                            <input type="text" id="mov-total-ep" placeholder="12 Episode" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Platform</label>
+                            <input type="text" id="mov-platform" placeholder="Netflix / Disney+" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mov-fields-completed" class="space-y-3 hidden">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Season / Episode Ditamatkan</label>
+                        <input type="text" id="mov-completed-season" placeholder="Season 1 (16 Ep)" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Rating (★ 1-5)</label>
+                        <select id="mov-rating" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm">
+                            <option value="5">★★★★★ (5/5)</option>
+                            <option value="4">★★★★☆ (4/5)</option>
+                            <option value="3">★★★☆☆ (3/5)</option>
+                            <option value="2">★★☆☆☆ (2/5)</option>
+                            <option value="1">★☆☆☆☆ (1/5)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-purple-500 text-white hover:bg-purple-600 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- REMINDER MODAL -->
+    <div id="modal-reminder" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Reminder Rutinitas</h3>
+            <form id="form-reminder" onsubmit="saveReminder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Aktivitas (Misal: Keramas)</label>
+                    <input type="text" id="rem-title" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Kapan Terakhir Kali Dilakukan?</label>
+                    <input type="date" id="rem-last-date" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Frekuensi Target</label>
+                        <input type="number" id="rem-freq-num" min="1" value="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Satuan Waktu</label>
+                        <select id="rem-freq-unit" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                            <option value="week">Kali seminggu</option>
+                            <option value="days">Hari sekali</option>
+                            <option value="month">Kali sebulan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-500 text-white hover:bg-rose-600 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- WISHLIST MODAL -->
+    <div id="modal-wishlist" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Wishlist Baru</h3>
+            <form id="form-wishlist" onsubmit="saveWishlist(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Nama Barang / Impian</label>
+                    <input type="text" id="wish-name" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Estimasi Harga / Catatan Link</label>
+                    <input type="text" id="wish-meta" placeholder="Misal: Rp 150.000 / Shopee Link" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-pink-500 text-white hover:bg-pink-600 transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CALENDAR EVENT MODAL -->
+    <div id="modal-calendar" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
+            <h3 id="cal-modal-title" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Agenda Tanggal</h3>
+            <form id="form-calendar" onsubmit="saveCalendarEvent(event)" class="space-y-4">
+                <input type="hidden" id="cal-selected-date">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Catatan / Acara</label>
+                    <input type="text" id="cal-event-text" required placeholder="Misal: 14 - 16 My BF kesini" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Warna Highlight</label>
+                    <div class="flex items-center gap-3 pt-1">
+                        <label class="cursor-pointer"><input type="radio" name="cal-color" value="bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300" checked class="accent-pink-500"> Pink</label>
+                        <label class="cursor-pointer"><input type="radio" name="cal-color" value="bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300" class="accent-indigo-500"> Indigo</label>
+                        <label class="cursor-pointer"><input type="radio" name="cal-color" value="bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300" class="accent-amber-500"> Kuning</label>
+                        <label class="cursor-pointer"><input type="radio" name="cal-color" value="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300" class="accent-emerald-500"> Hijau</label>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center pt-2">
+                    <button type="button" onclick="deleteCalendarEvent()" class="text-xs font-semibold text-rose-500 hover:underline">Hapus Agenda</button>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="closeModals()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Batal</button>
+                        <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-500 text-white hover:bg-indigo-600 transition">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // Data Store
+        let appData = JSON.parse(localStorage.getItem('piyo_mydashboard_data')) || {
+            waterGlasses: 0,
+            notes: [
+                { id: 1, title: 'Ide Belanja & Skincare', isChecklist: true, items: [{ text: 'Beli masker wajah', done: true }, { text: 'Catat resep sup hangat', done: false }], content: '' },
+                { id: 2, title: 'To-Do Kuliah', isChecklist: false, items: [], content: 'Selesaikan tugas web dev sebelum hari Selasa malam.' }
+            ],
+            finance: [
+                { id: 1, amount: 28000, desc: 'Makan siang bakso Kadipiro', source: 'Cash / Tunai', date: new Date().toISOString().split('T')[0] },
+                { id: 2, amount: 15000, desc: 'Es teh & Gorengan', source: 'GoPay / OVO', date: new Date().toISOString().split('T')[0] }
+            ],
+            movies: {
+                watching: [
+                    { id: 1, title: 'Our Beloved Summer', ep: 'Ep. 8', timestamp: '00:32:14' }
+                ],
+                wish: [
+                    { id: 1, title: 'Stranger Things S5', totalEp: '8 Ep', platform: 'Netflix' },
+                    { id: 2, title: 'Demon Slayer Hashira Arc', totalEp: '8 Ep', platform: 'Crunchyroll' }
+                ],
+                completed: [
+                    { id: 1, title: 'Twenty Five Twenty One', completedSeason: '16 Ep (End)', rating: 5 }
+                ]
+            },
+            reminders: [
+                { id: 1, title: 'Keramas', lastDate: '2026-10-08', freqNum: 3, freqUnit: 'week' },
+                { id: 2, title: 'Potong Kuku', lastDate: '2026-10-05', freqNum: 2, freqUnit: 'week' }
+            ],
+            wishlist: [
+                { id: 1, title: 'Hoodie Oversized Pastel', meta: 'Rp 220.000 (Shopee)', achieved: false },
+                { id: 2, title: 'Tumbler Corkcicle', meta: 'Rp 450.000', achieved: true }
+            ],
+            calendarEvents: {
+                '2026-10-14': { text: '14 - 16 My BF kesini ❤️', color: 'bg-pink-100 text-pink-700 dark:bg-pink-900/50 dark:text-pink-300' },
+                '2026-10-20': { text: 'Deadline Tugas Besar', color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300' }
+            }
+        };
+
+        let activeTab = 'water';
+        let activeMovieTab = 'watching';
+        let currentCalendarYear = new Date().getFullYear();
+        let currentCalendarMonth = new Date().getMonth();
+
+        function saveData() {
+            localStorage.setItem('piyo_mydashboard_data', JSON.stringify(appData));
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('piyo_theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+            
+            updateRealtimeClockAndDate();
+            setInterval(updateRealtimeClockAndDate, 1000);
+
+            renderWaterGlasses();
+            renderNotes();
+            renderFinance();
+            renderMovies();
+            renderReminders();
+            renderWishlist();
+            renderCalendar();
+            
+            switchTab('water');
+            lucide.createIcons();
+        };
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('piyo_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // --- REALTIME CLOCK & DATE ---
+        function updateRealtimeClockAndDate() {
+            const now = new Date();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-time-display').innerText = `${hours}:${minutes}:${seconds}`;
+
+            const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+            document.getElementById('current-date-display').innerText = now.toLocaleDateString('id-ID', options).replace(/\./g, '');
+
+            const hr = now.getHours();
+            let greeting = 'Good Morning, Piyo !';
+            if (hr >= 11 && hr < 15) greeting = 'Good Afternoon, Piyo 𝜗ৎ !';
+            else if (hr >= 15 && hr < 19) greeting = 'Good Evening, Piyo 𝜗ৎ !';
+            else if (hr >= 19 || hr < 4) greeting = 'Good Night, Piyo 𝜗ৎ !';
+            document.getElementById('greeting-text').innerText = greeting;
+        }
+
+        // --- TAB SWITCHING LOGIC ---
+        function switchTab(tabId) {
+            activeTab = tabId;
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                const btnTabId = btn.id.replace('menu-btn-', '');
+                btn.className = `tab-btn ${btnTabId === 'planner' ? 'col-span-2 sm:col-span-3' : ''} flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group`;
+                
+                const spans = btn.querySelectorAll('span');
+                if (spans.length >= 2) {
+                    spans[0].className = "block font-bold text-sm text-slate-800 dark:text-slate-100";
+                    spans[1].className = "text-[11px] text-slate-400";
+                }
+
+                const iconDiv = btn.querySelector('div');
+                if (iconDiv) {
+                    let iconBg = 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400';
+                    if (btnTabId === 'note') iconBg = 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400';
+                    if (btnTabId === 'finance') iconBg = 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400';
+                    if (btnTabId === 'movie') iconBg = 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400';
+                    if (btnTabId === 'water') iconBg = 'bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400';
+                    if (btnTabId === 'reminder') iconBg = 'bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400';
+                    if (btnTabId === 'planner') iconBg = 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400';
+                    
+                    iconDiv.className = `p-3 rounded-2xl ${iconBg} group-hover:scale-110 transition-transform`;
+                }
+            });
+
+            const activeBtn = document.getElementById(`menu-btn-${tabId}`);
+            if (activeBtn) {
+                let activeBg = 'bg-pink-500 border-pink-400 shadow-md';
+                let subTextColor = 'text-pink-100';
+
+                if (tabId === 'note') { activeBg = 'bg-amber-500 border-amber-400 shadow-md'; subTextColor = 'text-amber-100'; }
+                if (tabId === 'finance') { activeBg = 'bg-emerald-500 border-emerald-400 shadow-md'; subTextColor = 'text-emerald-100'; }
+                if (tabId === 'movie') { activeBg = 'bg-purple-500 border-purple-400 shadow-md'; subTextColor = 'text-purple-100'; }
+                if (tabId === 'water') { activeBg = 'bg-pink-500 border-pink-400 shadow-md'; subTextColor = 'text-pink-100'; }
+                if (tabId === 'reminder') { activeBg = 'bg-rose-500 border-rose-400 shadow-md'; subTextColor = 'text-rose-100'; }
+                if (tabId === 'wishlist') { activeBg = 'bg-pink-500 border-pink-400 shadow-md'; subTextColor = 'text-pink-100'; }
+                if (tabId === 'planner') { activeBg = 'bg-indigo-500 border-indigo-400 shadow-md'; subTextColor = 'text-indigo-100'; }
+
+                activeBtn.className = `tab-btn ${tabId === 'planner' ? 'col-span-2 sm:col-span-3' : ''} flex items-center gap-3 p-4 rounded-3xl ${activeBg} tab-transition text-left group`;
+                
+                const spans = activeBtn.querySelectorAll('span');
+                if (spans.length >= 2) {
+                    spans[0].className = "block font-bold text-sm text-white";
+                    spans[1].className = `text-[11px] ${subTextColor}`;
+                }
+
+                const iconDiv = activeBtn.querySelector('div');
+                if (iconDiv) iconDiv.className = "p-3 rounded-2xl bg-white/20 text-white group-hover:scale-110 transition-transform";
+            }
+
+            const panels = document.querySelectorAll('.feature-panel');
+            panels.forEach(p => p.classList.add('hidden'));
+
+            const targetPanel = document.getElementById(`panel-${tabId}`);
+            if (targetPanel) {
+                targetPanel.classList.remove('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        function closeModals() {
+            document.querySelectorAll('[id^="modal-"]').forEach(m => m.classList.add('hidden'));
+        }
+
+        // --- 1. AIR MINUM (WATER TRACKER) ---
+        function adjustWater(delta) {
+            appData.waterGlasses = Math.max(0, Math.min(8, appData.waterGlasses + delta));
+            saveData();
+            renderWaterGlasses();
+        }
+
+        function resetWater() {
+            appData.waterGlasses = 0;
+            saveData();
+            renderWaterGlasses();
+        }
+
+        function renderWaterGlasses() {
+            const count = appData.waterGlasses;
+            document.getElementById('water-glasses-count').innerText = count;
+            
+            const msgEl = document.getElementById('water-message');
+            if (count >= 8) {
+                msgEl.innerText = 'Luar biasa! Target 8 gelas hari ini sudah tercapai 🎉';
+            } else {
+                msgEl.innerText = `Kurang ${8 - count} gelas lagi. Yuk minum air biar tubuh tetap segar!`;
+            }
+
+            const grid = document.getElementById('glasses-grid');
+            let html = '';
+            for (let i = 1; i <= 8; i++) {
+                const filled = i <= count;
+                html += `
+                    <div onclick="setWaterExact(${i})" class="p-4 rounded-2xl border transition cursor-pointer flex flex-col items-center justify-center gap-2 ${filled ? 'bg-sky-50 dark:bg-sky-950/40 border-sky-300 dark:border-sky-700 shadow-sm' : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 opacity-60 hover:opacity-100'}">
+                        <div class="p-2.5 rounded-2xl ${filled ? 'bg-sky-500 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'}">
+                            <i data-lucide="glass-water" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold ${filled ? 'text-sky-700 dark:text-sky-300' : 'text-slate-500'}">Gelas ${i}</span>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function setWaterExact(index) {
+            if (appData.waterGlasses === index) {
+                appData.waterGlasses = index - 1;
+            } else {
+                appData.waterGlasses = index;
+            }
+            saveData();
+            renderWaterGlasses();
+        }
+
+        // --- 2. NOTE LOGIC ---
+        function openNoteModal() {
+            document.getElementById('form-note').reset();
+            document.getElementById('note-content-normal-wrap').classList.remove('hidden');
+            document.getElementById('note-content-checklist-wrap').classList.add('hidden');
+            document.getElementById('checklist-items-container').innerHTML = '';
+            addChecklistItemInput();
+            document.getElementById('modal-note').classList.remove('hidden');
+        }
+
+        function toggleNoteInputType() {
+            const isChecklist = document.getElementById('note-is-checklist').checked;
+            document.getElementById('note-content-normal-wrap').classList.toggle('hidden', isChecklist);
+            document.getElementById('note-content-checklist-wrap').classList.toggle('hidden', !isChecklist);
+        }
+
+        function addChecklistItemInput(val = '') {
+            const container = document.getElementById('checklist-items-container');
+            const div = document.createElement('div');
+            div.className = 'flex items-center gap-2 checklist-row';
+            div.innerHTML = `
+                <input type="checkbox" class="rounded border-slate-300 text-amber-500">
+                <input type="text" value="${val}" placeholder="Item checklist..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none">
+                <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-rose-500 text-xs px-1">✕</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function saveNote(e) {
+            e.preventDefault();
+            const title = document.getElementById('note-title').value;
+            const isChecklist = document.getElementById('note-is-checklist').checked;
+            let content = '', items = [];
+
+            if (isChecklist) {
+                document.querySelectorAll('#checklist-items-container .checklist-row').forEach(r => {
+                    const chk = r.querySelector('input[type="checkbox"]').checked;
+                    const txt = r.querySelector('input[type="text"]').value.trim();
+                    if(txt) items.push({ text: txt, done: chk });
+                });
+            } else {
+                content = document.getElementById('note-content').value;
+            }
+
+            appData.notes.unshift({ id: Date.now(), title, isChecklist, content, items });
+            saveData();
+            renderNotes();
+            closeModals();
+        }
+
+        function toggleChecklistItem(noteId, idx) {
+            const note = appData.notes.find(n => n.id === noteId);
+            if (note && note.items[idx]) {
+                note.items[idx].done = !note.items[idx].done;
+                saveData();
+                renderNotes();
+            }
+        }
+
+        function deleteNote(id) {
+            appData.notes = appData.notes.filter(n => n.id !== id);
+            saveData();
+            renderNotes();
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notes-container');
+            if (appData.notes.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Belum ada catatan.</div>`;
+                return;
+            }
+            container.innerHTML = appData.notes.map(note => `
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 relative">
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(note.title)}</h4>
+                        <button onclick="deleteNote(${note.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                    ${note.isChecklist ? `
+                        <div class="space-y-1.5 mt-2">
+                            ${note.items.map((item, idx) => `
+                                <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer">
+                                    <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleChecklistItem(${note.id}, ${idx})" class="rounded border-slate-300 text-amber-500 focus:ring-amber-400">
+                                    <span class="${item.done ? 'line-through text-slate-400' : ''}">${escapeHtml(item.text)}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    ` : `
+                        <p class="text-xs text-slate-600 dark:text-slate-400 whitespace-pre-line leading-relaxed">${escapeHtml(note.content)}</p>
+                    `}
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // --- 3. KEUANGAN LOGIC ---
+        function openFinanceModal() {
+            document.getElementById('form-finance').reset();
+            document.getElementById('modal-finance').classList.remove('hidden');
+        }
+
+        function saveFinance(e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('fin-amount').value);
+            const desc = document.getElementById('fin-desc').value;
+            const source = document.getElementById('fin-source').value;
+            const today = new Date().toISOString().split('T')[0];
+
+            appData.finance.unshift({ id: Date.now(), amount, desc, source, date: today });
+            saveData();
+            renderFinance();
+            closeModals();
+        }
+
+        function deleteFinance(id) {
+            appData.finance = appData.finance.filter(f => f.id !== id);
+            saveData();
+            renderFinance();
+        }
+
+        function renderFinance() {
+            const container = document.getElementById('finance-container');
+            const today = new Date().toISOString().split('T')[0];
+            const todayTransactions = appData.finance.filter(f => f.date === today);
+            const totalToday = todayTransactions.reduce((sum, f) => sum + f.amount, 0);
+            
+            document.getElementById('finance-total-display').innerText = `Rp ${totalToday.toLocaleString('id-ID')}`;
+
+            if (todayTransactions.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-slate-400 text-xs">Belum ada catatan pengeluaran hari ini.</div>`;
+                return;
+            }
+            container.innerHTML = todayTransactions.map(fin => `
+                <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200">${escapeHtml(fin.desc)}</h4>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-medium">${fin.source}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-xs text-rose-600 dark:text-rose-400">- Rp ${fin.amount.toLocaleString('id-ID')}</span>
+                        <button onclick="deleteFinance(${fin.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // --- 4. MOVIE LOGIC ---
+        function switchMovieTab(tab) {
+            activeMovieTab = tab;
+            ['watching', 'wish', 'completed'].forEach(t => {
+                const btn = document.getElementById(`mov-tab-${t}`);
+                if (btn) {
+                    btn.className = t === tab ? 'px-3 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition' : 'px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400';
+                }
+            });
+            renderMovies();
+        }
+
+        function openMovieModal() {
+            document.getElementById('form-movie').reset();
+            document.getElementById('mov-category').value = activeMovieTab;
+            toggleMovieCategoryFields();
+            document.getElementById('modal-movie').classList.remove('hidden');
+        }
+
+        function toggleMovieCategoryFields() {
+            const cat = document.getElementById('mov-category').value;
+            document.getElementById('mov-fields-watching').classList.toggle('hidden', cat !== 'watching');
+            document.getElementById('mov-fields-wish').classList.toggle('hidden', cat !== 'wish');
+            document.getElementById('mov-fields-completed').classList.toggle('hidden', cat !== 'completed');
+        }
+
+        function saveMovie(e) {
+            e.preventDefault();
+            const cat = document.getElementById('mov-category').value;
+            const title = document.getElementById('mov-title').value;
+            let newMovie = { id: Date.now(), title };
+
+            if (cat === 'watching') {
+                newMovie.ep = document.getElementById('mov-ep').value || 'Ep. 1';
+                newMovie.timestamp = document.getElementById('mov-timestamp').value || '00:00:00';
+                appData.movies.watching.unshift(newMovie);
+            } else if (cat === 'wish') {
+                newMovie.totalEp = document.getElementById('mov-total-ep').value || '12 Ep';
+                newMovie.platform = document.getElementById('mov-platform').value || 'Netflix';
+                appData.movies.wish.unshift(newMovie);
+            } else if (cat === 'completed') {
+                newMovie.completedSeason = document.getElementById('mov-completed-season').value || 'Season 1';
+                newMovie.rating = parseInt(document.getElementById('mov-rating').value) || 5;
+                appData.movies.completed.unshift(newMovie);
+            }
+
+            saveData();
+            switchMovieTab(cat);
+            closeModals();
+        }
+
+        function deleteMovie(cat, id) {
+            appData.movies[cat] = appData.movies[cat].filter(m => m.id !== id);
+            saveData();
+            renderMovies();
+        }
+
+        function renderMovies() {
+            const container = document.getElementById('movies-container');
+            const list = appData.movies[activeMovieTab];
+
+            if (list.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Belum ada film pada kategori ini.</div>`;
+                return;
+            }
+
+            if (activeMovieTab === 'watching') {
+                container.innerHTML = list.map(m => `
+                    <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(m.title)}</h4>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="px-2 py-0.5 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-700 font-semibold">${escapeHtml(m.ep)}</span>
+                                <span class="text-slate-500 font-mono">⏱️ ${escapeHtml(m.timestamp)}</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteMovie('watching', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                `).join('');
+            } else if (activeMovieTab === 'wish') {
+                container.innerHTML = list.map(m => `
+                    <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(m.title)}</h4>
+                            <div class="flex items-center gap-2 text-xs text-slate-500">
+                                <span>📺 ${escapeHtml(m.totalEp)}</span> • <span class="text-purple-600 font-medium">${escapeHtml(m.platform)}</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteMovie('wish', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                `).join('');
+            } else if (activeMovieTab === 'completed') {
+                container.innerHTML = list.map(m => `
+                    <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(m.title)}</h4>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="text-slate-500">${escapeHtml(m.completedSeason)}</span>
+                                <span class="text-amber-500 font-bold">${'★'.repeat(m.rating)}${'☆'.repeat(5 - m.rating)}</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteMovie('completed', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        // --- 5. REMINDER LOGIC ---
+        function openReminderModal() {
+            document.getElementById('form-reminder').reset();
+            document.getElementById('rem-last-date').valueAsDate = new Date();
+            document.getElementById('modal-reminder').classList.remove('hidden');
+        }
+
+        function calculateNextDate(lastDateStr, freqNum, freqUnit) {
+            const date = new Date(lastDateStr);
+            let addDays = freqUnit === 'week' ? Math.round(7 / freqNum) : freqUnit === 'days' ? parseInt(freqNum) : Math.round(30 / freqNum);
+            date.setDate(date.getDate() + addDays);
+            return date;
+        }
+
+        function saveReminder(e) {
+            e.preventDefault();
+            const title = document.getElementById('rem-title').value;
+            const lastDate = document.getElementById('rem-last-date').value;
+            const freqNum = parseInt(document.getElementById('rem-freq-num').value);
+            const freqUnit = document.getElementById('rem-freq-unit').value;
+
+            appData.reminders.unshift({ id: Date.now(), title, lastDate, freqNum, freqUnit });
+            saveData();
+            renderReminders();
+            closeModals();
+        }
+
+        function updateReminderDone(id) {
+            const rem = appData.reminders.find(r => r.id === id);
+            if (rem) {
+                rem.lastDate = new Date().toISOString().split('T')[0];
+                saveData();
+                renderReminders();
+            }
+        }
+
+        function deleteReminder(id) {
+            appData.reminders = appData.reminders.filter(r => r.id !== id);
+            saveData();
+            renderReminders();
+        }
+
+        function renderReminders() {
+            const container = document.getElementById('reminders-container');
+            if (appData.reminders.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Belum ada reminder.</div>`;
+                return;
+            }
+            container.innerHTML = appData.reminders.map(rem => {
+                const next = calculateNextDate(rem.lastDate, rem.freqNum, rem.freqUnit);
+                const nextStr = next.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                return `
+                    <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <div class="space-y-0.5">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(rem.title)}</h4>
+                            <p class="text-[11px] text-slate-500">Terakhir: ${rem.lastDate}</p>
+                            <p class="text-[11px] font-semibold text-rose-600 dark:text-rose-400">Next: ${nextStr}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="updateReminderDone(${rem.id})" title="Baru dilakukan hari ini" class="p-2 rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 hover:bg-rose-100"><i data-lucide="check" class="w-4 h-4"></i></button>
+                            <button onclick="deleteReminder(${rem.id})" class="p-2 rounded-xl text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        // --- 6. WISHLIST LOGIC ---
+        function openWishlistModal() {
+            document.getElementById('form-wishlist').reset();
+            document.getElementById('modal-wishlist').classList.remove('hidden');
+        }
+
+        function saveWishlist(e) {
+            e.preventDefault();
+            const title = document.getElementById('wish-name').value;
+            const meta = document.getElementById('wish-meta').value;
+            appData.wishlist.unshift({ id: Date.now(), title, meta, achieved: false });
+            saveData();
+            renderWishlist();
+            closeModals();
+        }
+
+        function toggleWishlist(id) {
+            const w = appData.wishlist.find(item => item.id === id);
+            if (w) {
+                w.achieved = !w.achieved;
+                saveData();
+                renderWishlist();
+            }
+        }
+
+        function deleteWishlist(id) {
+            appData.wishlist = appData.wishlist.filter(w => w.id !== id);
+            saveData();
+            renderWishlist();
+        }
+
+        function renderWishlist() {
+            const container = document.getElementById('wishlist-container');
+            if (appData.wishlist.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Wishlist masih kosong.</div>`;
+                return;
+            }
+            container.innerHTML = appData.wishlist.map(wish => `
+                <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                    <label class="flex items-center gap-3 cursor-pointer flex-1">
+                        <input type="checkbox" ${wish.achieved ? 'checked' : ''} onchange="toggleWishlist(${wish.id})" class="rounded border-slate-300 text-pink-500 w-4 h-4">
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 ${wish.achieved ? 'line-through text-slate-400' : ''}">${escapeHtml(wish.title)}</h4>
+                            ${wish.meta ? `<p class="text-[11px] text-slate-500">${escapeHtml(wish.meta)}</p>` : ''}
+                        </div>
+                    </label>
+                    <button onclick="deleteWishlist(${wish.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // --- 7. PLANNER CALENDAR (DENGAN HIGHLIGHT TANGGAL HARI INI) ---
+        const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        function changeMonth(dir) {
+            currentCalendarMonth += dir;
+            if (currentCalendarMonth > 11) { currentCalendarMonth = 0; currentCalendarYear++; }
+            else if (currentCalendarMonth < 0) { currentCalendarMonth = 11; currentCalendarYear--; }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            document.getElementById('calendar-month-year').innerText = `${monthNames[currentCalendarMonth]} ${currentCalendarYear}`;
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+
+            const todayObj = new Date();
+            const todayYear = todayObj.getFullYear();
+            const todayMonth = todayObj.getMonth();
+            const todayDate = todayObj.getDate();
+
+            const firstDayIndex = new Date(currentCalendarYear, currentCalendarMonth, 1).getDay();
+            let startDay = firstDayIndex - 1; if (startDay === -1) startDay = 6;
+            const totalDays = new Date(currentCalendarYear, currentCalendarMonth + 1, 0).getDate();
+
+            for (let i = 0; i < startDay; i++) {
+                grid.appendChild(document.createElement('div'));
+            }
+
+            for (let day = 1; day <= totalDays; day++) {
+                const dateKey = `${currentCalendarYear}-${String(currentCalendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const eventData = appData.calendarEvents[dateKey];
+
+                const isToday = (day === todayDate && currentCalendarMonth === todayMonth && currentCalendarYear === todayYear);
+
+                const cell = document.createElement('div');
+                
+                let todayClass = '';
+                if (isToday) {
+                    todayClass = eventData ? 'ring-2 ring-sky-500 ring-offset-2 dark:ring-offset-slate-900' : 'bg-sky-500 text-white font-bold shadow-md';
+                }
+
+                cell.className = `aspect-square rounded-2xl p-1.5 flex flex-col items-center justify-between text-xs cursor-pointer transition border border-transparent hover:border-indigo-300 ${isToday ? todayClass : (eventData ? eventData.color + ' font-bold shadow-sm' : 'bg-slate-50 dark:bg-slate-800/40')}`;
+                
+                cell.innerHTML = `
+                    <span class="${isToday && !eventData ? 'text-white' : (eventData ? '' : 'text-slate-700 dark:text-slate-300')}">${day}</span>
+                    ${isToday && !eventData ? '<span class="text-[9px] font-semibold text-sky-100">Hari ini</span>' : (eventData ? '<span class="w-1.5 h-1.5 rounded-full bg-current mb-0.5"></span>' : '<span class="w-1.5 h-1.5"></span>')}
+                `;
+                cell.onclick = () => openCalendarModal(dateKey);
+                grid.appendChild(cell);
+            }
+        }
+
+        function openCalendarModal(dateKey) {
+            document.getElementById('cal-selected-date').value = dateKey;
+            document.getElementById('cal-modal-title').innerText = `Agenda Tanggal ${dateKey}`;
+            const existing = appData.calendarEvents[dateKey];
+            document.getElementById('cal-event-text').value = existing ? existing.text : '';
+            if (existing) {
+                document.querySelectorAll('input[name="cal-color"]').forEach(r => { if(r.value === existing.color) r.checked = true; });
+            }
+            document.getElementById('modal-calendar').classList.remove('hidden');
+        }
+
+        document.getElementById('form-calendar').onsubmit = function(e) {
+            e.preventDefault();
+            const dateKey = document.getElementById('cal-selected-date').value;
+            const text = document.getElementById('cal-event-text').value;
+            const color = document.querySelector('input[name="cal-color"]:checked').value;
+            appData.calendarEvents[dateKey] = { text, color };
+            saveData();
+            renderCalendar();
+            closeModals();
+        };
+
+        function deleteCalendarEvent() {
+            const dateKey = document.getElementById('cal-selected-date').value;
+            delete appData.calendarEvents[dateKey];
+            saveData();
+            renderCalendar();
+            closeModals();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
