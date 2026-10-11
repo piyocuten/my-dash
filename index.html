@@ -49,8 +49,6 @@
     <!-- Top Header Bar -->
     <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 glass-card border-b border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 py-4 transition-colors">
         <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            
-            <!-- Greeting & Name -->
             <div>
                 <div class="flex items-center gap-2">
                     <h1 id="greeting-text" class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Good Morning, Piyo 𝜗ৎ !</h1>
@@ -58,22 +56,18 @@
                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Semoga harimu menyenangkan! ❤︎</p>
             </div>
 
-            <!-- Date, Realtime Clock, & Controls -->
             <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-                <!-- Clock & Date Pill -->
                 <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/80 px-3.5 py-2 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-medium">
                     <span class="text-slate-500 dark:text-slate-400 font-mono" id="current-time-display">--:--:--</span>
                     <span class="text-slate-300 dark:text-slate-600">|</span>
                     <span class="text-slate-600 dark:text-slate-300" id="current-date-display">--</span>
                 </div>
 
-                <!-- Theme Toggle Button -->
                 <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all shadow-sm">
                     <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
                     <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
                 </button>
             </div>
-
         </div>
     </header>
 
@@ -83,8 +77,6 @@
         <!-- CONTAINER FITUR: GRID MENU BUTTONS -->
         <section class="mb-6">
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                
-                <!-- 1. Note Button -->
                 <button onclick="switchTab('note')" id="menu-btn-note" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="sticky-note" class="w-5 h-5"></i>
@@ -95,7 +87,6 @@
                     </div>
                 </button>
 
-                <!-- 2. Keuangan Button -->
                 <button onclick="switchTab('finance')" id="menu-btn-finance" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="wallet" class="w-5 h-5"></i>
@@ -106,7 +97,6 @@
                     </div>
                 </button>
 
-                <!-- 3. Movie Button -->
                 <button onclick="switchTab('movie')" id="menu-btn-movie" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="film" class="w-5 h-5"></i>
@@ -117,7 +107,6 @@
                     </div>
                 </button>
 
-                <!-- 4. Air Minum Button -->
                 <button onclick="switchTab('water')" id="menu-btn-water" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-pink-500 text-white border border-pink-400 shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-white/20 text-white group-hover:scale-110 transition-transform">
                         <i data-lucide="glass-water" class="w-5 h-5"></i>
@@ -128,7 +117,6 @@
                     </div>
                 </button>
 
-                <!-- 5. Reminder Button -->
                 <button onclick="switchTab('reminder')" id="menu-btn-reminder" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="bell-ring" class="w-5 h-5"></i>
@@ -139,7 +127,6 @@
                     </div>
                 </button>
 
-                <!-- 6. Wishlist Button -->
                 <button onclick="switchTab('wishlist')" id="menu-btn-wishlist" class="tab-btn flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="gift" class="w-5 h-5"></i>
@@ -150,7 +137,6 @@
                     </div>
                 </button>
 
-                <!-- 7. Planner Button -->
                 <button onclick="switchTab('planner')" id="menu-btn-planner" class="tab-btn col-span-2 sm:col-span-3 flex items-center gap-3 p-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md tab-transition text-left group">
                     <div class="p-3 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
                         <i data-lucide="calendar" class="w-5 h-5"></i>
@@ -160,14 +146,13 @@
                         <span class="text-[11px] text-slate-400">Kalender agenda & event bulanan</span>
                     </div>
                 </button>
-
             </div>
         </section>
 
         <!-- CONTAINER DATA -->
         <section id="data-container-wrapper" class="bg-white/90 dark:bg-slate-900/90 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80 dark:border-slate-800 transition-all">
             
-            <!-- A. AIR MINUM PANEL (Default Active) -->
+            <!-- A. AIR MINUM PANEL -->
             <div id="panel-water" class="feature-panel space-y-6">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-sky-400 to-cyan-500 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
                     <div class="relative z-10 space-y-2">
@@ -306,8 +291,9 @@
     <!-- NOTE MODAL -->
     <div id="modal-note" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Catatan Baru</h3>
+            <h3 id="modal-note-heading" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Catatan Baru</h3>
             <form id="form-note" onsubmit="saveNote(event)" class="space-y-4">
+                <input type="hidden" id="note-edit-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Judul Note</label>
                     <input type="text" id="note-title" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
@@ -339,8 +325,9 @@
     <!-- FINANCE MODAL -->
     <div id="modal-finance" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Catat Pengeluaran Keuangan</h3>
+            <h3 id="modal-finance-heading" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Catat Pengeluaran Keuangan</h3>
             <form id="form-finance" onsubmit="saveFinance(event)" class="space-y-4">
+                <input type="hidden" id="fin-edit-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Jumlah (Rp)</label>
                     <input type="number" id="fin-amount" required placeholder="Contoh: 25000" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400">
@@ -369,8 +356,9 @@
     <!-- MOVIE MODAL -->
     <div id="modal-movie" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Movie / Series</h3>
+            <h3 id="modal-movie-heading" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Movie / Series</h3>
             <form id="form-movie" onsubmit="saveMovie(event)" class="space-y-4">
+                <input type="hidden" id="mov-edit-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Kategori Status</label>
                     <select id="mov-category" onchange="toggleMovieCategoryFields()" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400">
@@ -438,8 +426,9 @@
     <!-- REMINDER MODAL -->
     <div id="modal-reminder" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Reminder Rutinitas</h3>
+            <h3 id="modal-reminder-heading" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Reminder Rutinitas</h3>
             <form id="form-reminder" onsubmit="saveReminder(event)" class="space-y-4">
+                <input type="hidden" id="rem-edit-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Aktivitas (Misal: Keramas)</label>
                     <input type="text" id="rem-title" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
@@ -473,8 +462,9 @@
     <!-- WISHLIST MODAL -->
     <div id="modal-wishlist" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Wishlist Baru</h3>
+            <h3 id="modal-wishlist-heading" class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tambah Wishlist Baru</h3>
             <form id="form-wishlist" onsubmit="saveWishlist(event)" class="space-y-4">
+                <input type="hidden" id="wish-edit-id">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Nama Barang / Impian</label>
                     <input type="text" id="wish-name" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400">
@@ -734,13 +724,37 @@
             renderWaterGlasses();
         }
 
-        // --- 2. NOTE LOGIC ---
-        function openNoteModal() {
+        // --- 2. NOTE LOGIC (DENGAN EDIT) ---
+        function openNoteModal(id = null) {
             document.getElementById('form-note').reset();
-            document.getElementById('note-content-normal-wrap').classList.remove('hidden');
-            document.getElementById('note-content-checklist-wrap').classList.add('hidden');
             document.getElementById('checklist-items-container').innerHTML = '';
-            addChecklistItemInput();
+            
+            if (id) {
+                const note = appData.notes.find(n => n.id === id);
+                if (note) {
+                    document.getElementById('note-edit-id').value = note.id;
+                    document.getElementById('modal-note-heading').innerText = 'Edit Catatan';
+                    document.getElementById('note-title').value = note.title;
+                    document.getElementById('note-is-checklist').checked = note.isChecklist;
+                    
+                    if (note.isChecklist) {
+                        document.getElementById('note-content-normal-wrap').classList.add('hidden');
+                        document.getElementById('note-content-checklist-wrap').classList.remove('hidden');
+                        (note.items || []).forEach(item => addChecklistItemInput(item.text, item.done));
+                    } else {
+                        document.getElementById('note-content-normal-wrap').classList.remove('hidden');
+                        document.getElementById('note-content-checklist-wrap').classList.add('hidden');
+                        document.getElementById('note-content').value = note.content;
+                    }
+                }
+            } else {
+                document.getElementById('note-edit-id').value = '';
+                document.getElementById('modal-note-heading').innerText = 'Tambah Catatan Baru';
+                document.getElementById('note-is-checklist').checked = false;
+                document.getElementById('note-content-normal-wrap').classList.remove('hidden');
+                document.getElementById('note-content-checklist-wrap').classList.add('hidden');
+                addChecklistItemInput();
+            }
             document.getElementById('modal-note').classList.remove('hidden');
         }
 
@@ -750,13 +764,13 @@
             document.getElementById('note-content-checklist-wrap').classList.toggle('hidden', !isChecklist);
         }
 
-        function addChecklistItemInput(val = '') {
+        function addChecklistItemInput(val = '', done = false) {
             const container = document.getElementById('checklist-items-container');
             const div = document.createElement('div');
             div.className = 'flex items-center gap-2 checklist-row';
             div.innerHTML = `
-                <input type="checkbox" class="rounded border-slate-300 text-amber-500">
-                <input type="text" value="${val}" placeholder="Item checklist..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none">
+                <input type="checkbox" ${done ? 'checked' : ''} class="rounded border-slate-300 text-amber-500">
+                <input type="text" value="${escapeHtml(val)}" placeholder="Item checklist..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-none">
                 <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-rose-500 text-xs px-1">✕</button>
             `;
             container.appendChild(div);
@@ -764,6 +778,7 @@
 
         function saveNote(e) {
             e.preventDefault();
+            const editId = document.getElementById('note-edit-id').value;
             const title = document.getElementById('note-title').value;
             const isChecklist = document.getElementById('note-is-checklist').checked;
             let content = '', items = [];
@@ -778,7 +793,15 @@
                 content = document.getElementById('note-content').value;
             }
 
-            appData.notes.unshift({ id: Date.now(), title, isChecklist, content, items });
+            if (editId) {
+                const index = appData.notes.findIndex(n => n.id == editId);
+                if (index !== -1) {
+                    appData.notes[index] = { ...appData.notes[index], title, isChecklist, content, items };
+                }
+            } else {
+                appData.notes.unshift({ id: Date.now(), title, isChecklist, content, items });
+            }
+
             saveData();
             renderNotes();
             closeModals();
@@ -809,11 +832,14 @@
                 <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 relative">
                     <div class="flex items-start justify-between gap-2 mb-2">
                         <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">${escapeHtml(note.title)}</h4>
-                        <button onclick="deleteNote(${note.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openNoteModal(${note.id})" class="text-slate-400 hover:text-amber-500"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                            <button onclick="deleteNote(${note.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        </div>
                     </div>
                     ${note.isChecklist ? `
                         <div class="space-y-1.5 mt-2">
-                            ${note.items.map((item, idx) => `
+                            ${(note.items || []).map((item, idx) => `
                                 <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer">
                                     <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleChecklistItem(${note.id}, ${idx})" class="rounded border-slate-300 text-amber-500 focus:ring-amber-400">
                                     <span class="${item.done ? 'line-through text-slate-400' : ''}">${escapeHtml(item.text)}</span>
@@ -828,20 +854,42 @@
             lucide.createIcons();
         }
 
-        // --- 3. KEUANGAN LOGIC ---
-        function openFinanceModal() {
+        // --- 3. KEUANGAN LOGIC (DENGAN EDIT) ---
+        function openFinanceModal(id = null) {
             document.getElementById('form-finance').reset();
+            if (id) {
+                const fin = appData.finance.find(f => f.id === id);
+                if (fin) {
+                    document.getElementById('fin-edit-id').value = fin.id;
+                    document.getElementById('modal-finance-heading').innerText = 'Edit Pengeluaran Keuangan';
+                    document.getElementById('fin-amount').value = fin.amount;
+                    document.getElementById('fin-desc').value = fin.desc;
+                    document.getElementById('fin-source').value = fin.source;
+                }
+            } else {
+                document.getElementById('fin-edit-id').value = '';
+                document.getElementById('modal-finance-heading').innerText = 'Catat Pengeluaran Keuangan';
+            }
             document.getElementById('modal-finance').classList.remove('hidden');
         }
 
         function saveFinance(e) {
             e.preventDefault();
+            const editId = document.getElementById('fin-edit-id').value;
             const amount = parseFloat(document.getElementById('fin-amount').value);
             const desc = document.getElementById('fin-desc').value;
             const source = document.getElementById('fin-source').value;
             const today = new Date().toISOString().split('T')[0];
 
-            appData.finance.unshift({ id: Date.now(), amount, desc, source, date: today });
+            if (editId) {
+                const index = appData.finance.findIndex(f => f.id == editId);
+                if (index !== -1) {
+                    appData.finance[index] = { ...appData.finance[index], amount, desc, source };
+                }
+            } else {
+                appData.finance.unshift({ id: Date.now(), amount, desc, source, date: today });
+            }
+
             saveData();
             renderFinance();
             closeModals();
@@ -873,6 +921,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="font-bold text-xs text-rose-600 dark:text-rose-400">- Rp ${fin.amount.toLocaleString('id-ID')}</span>
+                        <button onclick="openFinanceModal(${fin.id})" class="text-slate-400 hover:text-emerald-500"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
                         <button onclick="deleteFinance(${fin.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
                     </div>
                 </div>
@@ -880,7 +929,7 @@
             lucide.createIcons();
         }
 
-        // --- 4. MOVIE LOGIC ---
+        // --- 4. MOVIE LOGIC (DENGAN EDIT) ---
         function switchMovieTab(tab) {
             activeMovieTab = tab;
             ['watching', 'wish', 'completed'].forEach(t => {
@@ -892,10 +941,34 @@
             renderMovies();
         }
 
-        function openMovieModal() {
+        function openMovieModal(cat = activeMovieTab, id = null) {
             document.getElementById('form-movie').reset();
-            document.getElementById('mov-category').value = activeMovieTab;
+            document.getElementById('mov-category').value = cat;
             toggleMovieCategoryFields();
+
+            if (id) {
+                const mov = (appData.movies[cat] || []).find(m => m.id === id);
+                if (mov) {
+                    document.getElementById('mov-edit-id').value = mov.id;
+                    document.getElementById('modal-movie-heading').innerText = 'Edit Movie / Series';
+                    document.getElementById('mov-title').value = mov.title;
+
+                    if (cat === 'watching') {
+                        document.getElementById('mov-ep').value = mov.ep || '';
+                        document.getElementById('mov-timestamp').value = mov.timestamp || '';
+                    } else if (cat === 'wish') {
+                        document.getElementById('mov-total-ep').value = mov.totalEp || '';
+                        document.getElementById('mov-platform').value = mov.platform || '';
+                    } else if (cat === 'completed') {
+                        document.getElementById('mov-completed-season').value = mov.completedSeason || '';
+                        document.getElementById('mov-rating').value = mov.rating || 5;
+                    }
+                }
+            } else {
+                document.getElementById('mov-edit-id').value = '';
+                document.getElementById('modal-movie-heading').innerText = 'Tambah Movie / Series';
+            }
+
             document.getElementById('modal-movie').classList.remove('hidden');
         }
 
@@ -908,22 +981,30 @@
 
         function saveMovie(e) {
             e.preventDefault();
+            const editId = document.getElementById('mov-edit-id').value;
             const cat = document.getElementById('mov-category').value;
             const title = document.getElementById('mov-title').value;
-            let newMovie = { id: Date.now(), title };
+
+            let updatedMovie = { id: editId ? parseInt(editId) : Date.now(), title };
 
             if (cat === 'watching') {
-                newMovie.ep = document.getElementById('mov-ep').value || 'Ep. 1';
-                newMovie.timestamp = document.getElementById('mov-timestamp').value || '00:00:00';
-                appData.movies.watching.unshift(newMovie);
+                updatedMovie.ep = document.getElementById('mov-ep').value || 'Ep. 1';
+                updatedMovie.timestamp = document.getElementById('mov-timestamp').value || '00:00:00';
             } else if (cat === 'wish') {
-                newMovie.totalEp = document.getElementById('mov-total-ep').value || '12 Ep';
-                newMovie.platform = document.getElementById('mov-platform').value || 'Netflix';
-                appData.movies.wish.unshift(newMovie);
+                updatedMovie.totalEp = document.getElementById('mov-total-ep').value || '12 Ep';
+                updatedMovie.platform = document.getElementById('mov-platform').value || 'Netflix';
             } else if (cat === 'completed') {
-                newMovie.completedSeason = document.getElementById('mov-completed-season').value || 'Season 1';
-                newMovie.rating = parseInt(document.getElementById('mov-rating').value) || 5;
-                appData.movies.completed.unshift(newMovie);
+                updatedMovie.completedSeason = document.getElementById('mov-completed-season').value || 'Season 1';
+                updatedMovie.rating = parseInt(document.getElementById('mov-rating').value) || 5;
+            }
+
+            if (editId) {
+                const index = appData.movies[cat].findIndex(m => m.id == editId);
+                if (index !== -1) {
+                    appData.movies[cat][index] = updatedMovie;
+                }
+            } else {
+                appData.movies[cat].unshift(updatedMovie);
             }
 
             saveData();
@@ -939,7 +1020,7 @@
 
         function renderMovies() {
             const container = document.getElementById('movies-container');
-            const list = appData.movies[activeMovieTab];
+            const list = appData.movies[activeMovieTab] || [];
 
             if (list.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-xs">Belum ada film pada kategori ini.</div>`;
@@ -956,7 +1037,10 @@
                                 <span class="text-slate-500 font-mono">⏱️ ${escapeHtml(m.timestamp)}</span>
                             </div>
                         </div>
-                        <button onclick="deleteMovie('watching', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openMovieModal('watching', ${m.id})" class="text-slate-400 hover:text-purple-500"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                            <button onclick="deleteMovie('watching', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
                     </div>
                 `).join('');
             } else if (activeMovieTab === 'wish') {
@@ -968,7 +1052,10 @@
                                 <span>📺 ${escapeHtml(m.totalEp)}</span> • <span class="text-purple-600 font-medium">${escapeHtml(m.platform)}</span>
                             </div>
                         </div>
-                        <button onclick="deleteMovie('wish', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openMovieModal('wish', ${m.id})" class="text-slate-400 hover:text-purple-500"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                            <button onclick="deleteMovie('wish', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
                     </div>
                 `).join('');
             } else if (activeMovieTab === 'completed') {
@@ -981,17 +1068,34 @@
                                 <span class="text-amber-500 font-bold">${'★'.repeat(m.rating)}${'☆'.repeat(5 - m.rating)}</span>
                             </div>
                         </div>
-                        <button onclick="deleteMovie('completed', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openMovieModal('completed', ${m.id})" class="text-slate-400 hover:text-purple-500"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                            <button onclick="deleteMovie('completed', ${m.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
                     </div>
                 `).join('');
             }
             lucide.createIcons();
         }
 
-        // --- 5. REMINDER LOGIC ---
-        function openReminderModal() {
+        // --- 5. REMINDER LOGIC (DENGAN EDIT) ---
+        function openReminderModal(id = null) {
             document.getElementById('form-reminder').reset();
-            document.getElementById('rem-last-date').valueAsDate = new Date();
+            if (id) {
+                const rem = appData.reminders.find(r => r.id === id);
+                if (rem) {
+                    document.getElementById('rem-edit-id').value = rem.id;
+                    document.getElementById('modal-reminder-heading').innerText = 'Edit Reminder Rutinitas';
+                    document.getElementById('rem-title').value = rem.title;
+                    document.getElementById('rem-last-date').value = rem.lastDate;
+                    document.getElementById('rem-freq-num').value = rem.freqNum;
+                    document.getElementById('rem-freq-unit').value = rem.freqUnit;
+                }
+            } else {
+                document.getElementById('rem-edit-id').value = '';
+                document.getElementById('modal-reminder-heading').innerText = 'Tambah Reminder Rutinitas';
+                document.getElementById('rem-last-date').valueAsDate = new Date();
+            }
             document.getElementById('modal-reminder').classList.remove('hidden');
         }
 
@@ -1004,12 +1108,21 @@
 
         function saveReminder(e) {
             e.preventDefault();
+            const editId = document.getElementById('rem-edit-id').value;
             const title = document.getElementById('rem-title').value;
             const lastDate = document.getElementById('rem-last-date').value;
             const freqNum = parseInt(document.getElementById('rem-freq-num').value);
             const freqUnit = document.getElementById('rem-freq-unit').value;
 
-            appData.reminders.unshift({ id: Date.now(), title, lastDate, freqNum, freqUnit });
+            if (editId) {
+                const index = appData.reminders.findIndex(r => r.id == editId);
+                if (index !== -1) {
+                    appData.reminders[index] = { ...appData.reminders[index], title, lastDate, freqNum, freqUnit };
+                }
+            } else {
+                appData.reminders.unshift({ id: Date.now(), title, lastDate, freqNum, freqUnit });
+            }
+
             saveData();
             renderReminders();
             closeModals();
@@ -1048,6 +1161,7 @@
                         </div>
                         <div class="flex items-center gap-1.5">
                             <button onclick="updateReminderDone(${rem.id})" title="Baru dilakukan hari ini" class="p-2 rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 hover:bg-rose-100"><i data-lucide="check" class="w-4 h-4"></i></button>
+                            <button onclick="openReminderModal(${rem.id})" class="p-2 rounded-xl text-slate-400 hover:text-rose-500"><i data-lucide="pencil" class="w-4 h-4"></i></button>
                             <button onclick="deleteReminder(${rem.id})" class="p-2 rounded-xl text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>
@@ -1056,17 +1170,39 @@
             lucide.createIcons();
         }
 
-        // --- 6. WISHLIST LOGIC ---
-        function openWishlistModal() {
+        // --- 6. WISHLIST LOGIC (DENGAN EDIT) ---
+        function openWishlistModal(id = null) {
             document.getElementById('form-wishlist').reset();
+            if (id) {
+                const wish = appData.wishlist.find(w => w.id === id);
+                if (wish) {
+                    document.getElementById('wish-edit-id').value = wish.id;
+                    document.getElementById('modal-wishlist-heading').innerText = 'Edit Wishlist';
+                    document.getElementById('wish-name').value = wish.title;
+                    document.getElementById('wish-meta').value = wish.meta || '';
+                }
+            } else {
+                document.getElementById('wish-edit-id').value = '';
+                document.getElementById('modal-wishlist-heading').innerText = 'Tambah Wishlist Baru';
+            }
             document.getElementById('modal-wishlist').classList.remove('hidden');
         }
 
         function saveWishlist(e) {
             e.preventDefault();
+            const editId = document.getElementById('wish-edit-id').value;
             const title = document.getElementById('wish-name').value;
             const meta = document.getElementById('wish-meta').value;
-            appData.wishlist.unshift({ id: Date.now(), title, meta, achieved: false });
+
+            if (editId) {
+                const index = appData.wishlist.findIndex(w => w.id == editId);
+                if (index !== -1) {
+                    appData.wishlist[index] = { ...appData.wishlist[index], title, meta };
+                }
+            } else {
+                appData.wishlist.unshift({ id: Date.now(), title, meta, achieved: false });
+            }
+
             saveData();
             renderWishlist();
             closeModals();
@@ -1102,13 +1238,16 @@
                             ${wish.meta ? `<p class="text-[11px] text-slate-500">${escapeHtml(wish.meta)}</p>` : ''}
                         </div>
                     </label>
-                    <button onclick="deleteWishlist(${wish.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="openWishlistModal(${wish.id})" class="text-slate-400 hover:text-pink-500"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                        <button onclick="deleteWishlist(${wish.id})" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
                 </div>
             `).join('');
             lucide.createIcons();
         }
 
-        // --- 7. PLANNER CALENDAR (DENGAN HIGHLIGHT TANGGAL HARI INI) ---
+        // --- 7. PLANNER CALENDAR ---
         const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
         function changeMonth(dir) {
@@ -1138,7 +1277,7 @@
 
             for (let day = 1; day <= totalDays; day++) {
                 const dateKey = `${currentCalendarYear}-${String(currentCalendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const eventData = appData.calendarEvents[dateKey];
+                const eventData = (appData.calendarEvents || {})[dateKey];
 
                 const isToday = (day === todayDate && currentCalendarMonth === todayMonth && currentCalendarYear === todayYear);
 
@@ -1163,7 +1302,7 @@
         function openCalendarModal(dateKey) {
             document.getElementById('cal-selected-date').value = dateKey;
             document.getElementById('cal-modal-title').innerText = `Agenda Tanggal ${dateKey}`;
-            const existing = appData.calendarEvents[dateKey];
+            const existing = (appData.calendarEvents || {})[dateKey];
             document.getElementById('cal-event-text').value = existing ? existing.text : '';
             if (existing) {
                 document.querySelectorAll('input[name="cal-color"]').forEach(r => { if(r.value === existing.color) r.checked = true; });
@@ -1171,20 +1310,21 @@
             document.getElementById('modal-calendar').classList.remove('hidden');
         }
 
-        document.getElementById('form-calendar').onsubmit = function(e) {
+        function saveCalendarEvent(e) {
             e.preventDefault();
             const dateKey = document.getElementById('cal-selected-date').value;
             const text = document.getElementById('cal-event-text').value;
             const color = document.querySelector('input[name="cal-color"]:checked').value;
+            if(!appData.calendarEvents) appData.calendarEvents = {};
             appData.calendarEvents[dateKey] = { text, color };
             saveData();
             renderCalendar();
             closeModals();
-        };
+        }
 
         function deleteCalendarEvent() {
             const dateKey = document.getElementById('cal-selected-date').value;
-            delete appData.calendarEvents[dateKey];
+            if(appData.calendarEvents) delete appData.calendarEvents[dateKey];
             saveData();
             renderCalendar();
             closeModals();
@@ -1195,6 +1335,7 @@
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
+
     <!-- Firebase SDK Modular & Realtime Sync Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
@@ -1214,7 +1355,6 @@
         const db = getFirestore(app);
         const docRef = doc(db, "dashboards", "piyo_shared_data");
 
-        // Timpa fungsi saveData agar otomatis menyimpan ke Firebase Cloud Database
         window.saveData = async function() {
             try {
                 await setDoc(docRef, appData);
@@ -1223,7 +1363,6 @@
             }
         };
 
-        // Pasang Listener Realtime untuk Otomatis Mengupdate Tampilan
         onSnapshot(docRef, (snapshot) => {
             if (snapshot.exists()) {
                 appData = snapshot.data();
@@ -1244,7 +1383,5 @@
             lucide.createIcons();
         }
     </script>
-</body>
-</html>
 </body>
 </html>
