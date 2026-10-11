@@ -1195,28 +1195,56 @@
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    <!-- Firebase SDK Modular & Realtime Sync Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAsf9Rg0EnMa7b4NSNdqnKd3GkGBpJBPFA",
-    authDomain: "my-dashie.firebaseapp.com",
-    projectId: "my-dashie",
-    storageBucket: "my-dashie.firebasestorage.app",
-    messagingSenderId: "735131942582",
-    appId: "1:735131942582:web:331024ecfc6feaa677b017",
-    measurementId: "G-4QDVXK3ZVG"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsf9Rg0EnMa7b4NSNdqnKd3GkGBpJBPFA",
+            authDomain: "my-dashie.firebaseapp.com",
+            projectId: "my-dashie",
+            storageBucket: "my-dashie.firebasestorage.app",
+            messagingSenderId: "735131942582",
+            appId: "1:735131942582:web:331024ecfc6feaa677b017",
+            measurementId: "G-4QDVXK3ZVG"
+        };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const docRef = doc(db, "dashboards", "piyo_shared_data");
+
+        // Timpa fungsi saveData agar otomatis menyimpan ke Firebase Cloud Database
+        window.saveData = async function() {
+            try {
+                await setDoc(docRef, appData);
+            } catch (e) {
+                console.error("Gagal menyimpan ke Firebase: ", e);
+            }
+        };
+
+        // Pasang Listener Realtime untuk Otomatis Mengupdate Tampilan
+        onSnapshot(docRef, (snapshot) => {
+            if (snapshot.exists()) {
+                appData = snapshot.data();
+                renderAllPanels();
+            } else {
+                window.saveData();
+            }
+        });
+
+        function renderAllPanels() {
+            renderWaterGlasses();
+            renderNotes();
+            renderFinance();
+            renderMovies();
+            renderReminders();
+            renderWishlist();
+            renderCalendar();
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
 </body>
 </html>
